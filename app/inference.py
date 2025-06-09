@@ -14,16 +14,8 @@ mp_face_detection = mp.solutions.face_detection
 rescale = layers.Rescaling(scale=1./127.5, offset=-1)
 classes = ['suprise', 'fear', 'disgust', 'happy','sad', 'angry', 'neutral']
 
-def load_model():
-    url = "https://drive.google.com/file/d/1UABX1ZD9XiJTk2a0CGx6SFsgjWpZyM8F/view?usp=sharing" 
-    # Replace with your Google Drive direct download link
-    response = requests.get(url, stream=True)
-    response.raise_for_status()
 
-    return keras.models.load_model('facemodel.keras')
-
-
-classifier = load_model()
+classifier = keras.models.load_model('facemodel.keras')
 frame_results = []
 
 
