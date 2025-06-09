@@ -7,6 +7,7 @@ import cv2
 import matplotlib.pyplot as plt
 import os
 import gdown
+import requests
 
 
 mp_face_detection = mp.solutions.face_detection
@@ -15,12 +16,11 @@ classes = ['suprise', 'fear', 'disgust', 'happy','sad', 'angry', 'neutral']
 
 def load_model():
     url = "https://drive.google.com/file/d/1UABX1ZD9XiJTk2a0CGx6SFsgjWpZyM8F/view?usp=sharing" 
-    model_path = "facemodel.keras"
+    # Replace with your Google Drive direct download link
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
 
-    if not os.path.exists(model_path):
-        gdown.download(url, model_path, quiet=False)
-
-    return keras.models.load_model(model_path)
+    return keras.models.load_model('facemodel.keras')
 
 
 classifier = load_model()
