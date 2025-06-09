@@ -1,4 +1,4 @@
-tensorflow==2.19.0
+tensorflow
 gdown==5.2.0
 streamlit==1.45.1
 matplotlib==3.6.0
