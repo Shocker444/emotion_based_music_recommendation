@@ -5,14 +5,25 @@ from keras import layers
 from modelutils import classifier_model
 import cv2
 import matplotlib.pyplot as plt
+import os
+import gdown
 
 
 mp_face_detection = mp.solutions.face_detection
 rescale = layers.Rescaling(scale=1./127.5, offset=-1)
 classes = ['suprise', 'fear', 'disgust', 'happy','sad', 'angry', 'neutral']
 
+def load_model():
+    url = "https://drive.google.com/file/d/1UABX1ZD9XiJTk2a0CGx6SFsgjWpZyM8F/view?usp=sharing" 
+    model_path = "facemodel.keras"
 
-classifier = keras.models.load_model('facemodel2.keras')
+    if not os.path.exists(model_path):
+        gdown.download(url, model_path, quiet=False)
+
+    return keras.models.load_model(model_path)
+
+
+classifier = load_model()
 frame_results = []
 
 
@@ -47,7 +58,7 @@ def run_classifier_on_video():
 
                     x, y, w, h = int(bb.xmin*width), int(bb.ymin*height), int(bb.width*width), int(bb.height*height)
                     face = image[y:y + h, x:x + w]
-                    face = cv2.resize(face, (224, 224))
+                    face = rescale(cv2.resize(face, (224, 224)))
                     prediction = classifier.predict(np.expand_dims(face, axis=0))
                     prediction = np.argmax(prediction, axis=1)
 
