@@ -1,0 +1,10 @@
+tensorflow==2.19.0
+gdown==5.2.0
+streamlit==1.45.1
+matplotlib==3.6.0
+numpy==1.26.4
+opencv-python==4.10.0.84
+keras==3.9.2
+mediapipe==0.10.21
+smolagents==1.15.0
+duckduckgo_search==8.0.2
