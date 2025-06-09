@@ -6,8 +6,10 @@ from modelutils import classifier_model
 import cv2
 import matplotlib.pyplot as plt
 import os
-import gdown
+from pathlib import Path
 import requests
+
+os_path = Path(__file__).parents[0]
 
 
 mp_face_detection = mp.solutions.face_detection
@@ -15,7 +17,7 @@ rescale = layers.Rescaling(scale=1./127.5, offset=-1)
 classes = ['suprise', 'fear', 'disgust', 'happy','sad', 'angry', 'neutral']
 
 
-classifier = keras.models.load_model('facemodel.keras')
+classifier = keras.models.load_model(f'{os_path}/facemodel.keras')
 frame_results = []
 
 
